@@ -10,14 +10,14 @@ set siteurl alberto.dietze.it
 #filename displayname
 #move to fake to not deploy
 set mymatrix [list \
-{index Home 1.0} \
-{about About 0.5} \
-{gpg "GPG" 0.5} \
+{index Home "1.0"} \
+{about About "0.5"} \
+{gpg "GPG" "0.5"} \
 ]
 set fake [list \
-{index Home 1.0} \
-{about About 0.5} \
-{gpg "GPG" 0.5} \
+{index Home "1.0"} \
+{about About "0.5"} \
+{gpg "GPG" "0.5"} \
 ]
 
 #file read
@@ -112,8 +112,4 @@ foreach index $mymatrix {
 	append sitemapurls [string map [list index.html ""] "\n\t<url>\n\t\t<loc>https://${siteurl}/${fname}.html</loc>\n\t\t<lastmod>[clock format [file mtime "body/${fname}.html"] -format "%Y-%m-%d"]</lastmod>\n\t\t<priority>${valprio}</priority>\n\t</url>"]
 }
 fswrite "$deploypath/sitemap.xml" [string map [list %%DATA%% $sitemapurls] [fsread body/sitemap.xml]]
-
-
-
-
 
