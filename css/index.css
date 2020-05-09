@@ -1,0 +1,29 @@
+/*
+h1 {
+	color: black;
+	font-weight: bold;
+	letter-spacing: 0.1em;
+	font-size: 4em;
+	margin: -10px 0;
+}
+
+h3 {
+	color: black;
+	font-weight: bold;
+	letter-spacing: 0.1em;
+	font-size: 2em;
+	margin: -10px 0;
+}
+*/
+
+.contact-icons {
+	display: flex;
+	flex-direction: row;
+	/* Below sets up your display method: flex-start|flex-end|space-between|space-around */
+	justify-content: space-around;
+	/* Below removes bullets and cleans white-space */
+	list-style: none;
+	padding: 10;
+	/* Bonus: forces no word-wrap */
+	white-space: nowrap;
+}

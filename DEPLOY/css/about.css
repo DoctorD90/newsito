@@ -1,0 +1,6 @@
+#aboutme {
+	color: black;
+	font-size: 1.5em;
+    max-height: 50vh;
+	overflow: auto
+}
