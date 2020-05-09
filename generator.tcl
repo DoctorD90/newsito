@@ -109,7 +109,7 @@ foreach index $mymatrix {
 set sitemapurls ""
 foreach index $mymatrix {
 	foreach {fname display valprio} $index {}
-	append sitemapurls [string map [list index.html ""] "\n\t<url>\n\t\t<loc>https://${siteurl}/${fname}.html</loc>\n\t\t<lastmod>[clock format [file mtime "body/${fname}.html"] -format "%Y-%m-%d"]</lastmod>\n\t\t<priority>${valprio}</priority>\n\t<url>"]
+	append sitemapurls [string map [list index.html ""] "\n\t<url>\n\t\t<loc>https://${siteurl}/${fname}.html</loc>\n\t\t<lastmod>[clock format [file mtime "body/${fname}.html"] -format "%Y-%m-%d"]</lastmod>\n\t\t<priority>${valprio}</priority>\n\t</url>"]
 }
 fswrite "$deploypath/sitemap.xml" [string map [list %%DATA%% $sitemapurls] [fsread body/sitemap.xml]]
 
