@@ -3,6 +3,23 @@
 #DEPLOY folder
 set deploypath DEPLOY
 
+#site url
+set siteurl alberto.dietze.it
+
+#page to deploy
+#filename displayname
+#move to fake to not deploy
+set mymatrix [list \
+{index Home 1.0} \
+{about About 0.5} \
+{gpg "GPG" 0.5} \
+]
+set fake [list \
+{index Home 1.0} \
+{about About 0.5} \
+{gpg "GPG" 0.5} \
+]
+
 #file read
 proc fsread {file} {
 	set fs [open $file r]
@@ -36,20 +53,6 @@ proc navbarelement {mymatrix item} {
 #set template content
 set templ [fsread body/template.html]
 
-#page to deploy
-#filename displayname
-#move to fake to not deploy
-set mymatrix [list \
-{index Home} \
-{about About} \
-{gpg "GPG"} \
-]
-set fake [list \
-{index Home} \
-{about About} \
-{gpg "GPG"} \
-]
-
 #folder structure
 set create_folder [list \
 css \
@@ -79,10 +82,11 @@ foreach item $copy_files {
 }
 
 #github CNAME file
-fswrite "$deploypath/CNAME" alberto.dietze.it
+fswrite "$deploypath/CNAME" $siteurl
 
+# files site
 foreach index $mymatrix {
-	foreach {fname display} $index {}
+	foreach {fname display valprio} $index {}
 	#CSS LOAD
 	if {[file exists "css/${fname}.css"]} {
 		set css "\n\t<link rel=\"stylesheet\" media=\"screen\" href=\"css/${fname}.css\">"
@@ -99,3 +103,17 @@ foreach index $mymatrix {
 	#write file
 	fswrite "$deploypath/${fname}.html" $out
 }
+
+# sitemaps
+
+set sitemapurls ""
+foreach index $mymatrix {
+	foreach {fname display valprio} $index {}
+	append sitemapurls [string map [list index.html ""] "\n\t<url>\n\t\t<loc>https://${siteurl}/${fname}.html</loc>\n\t\t<lastmod>[clock format [file mtime "body/${fname}.html"] -format "%Y-%m-%d"]</lastmod>\n\t\t<priority>${valprio}</priority>\n\t<url>"]
+}
+fswrite "$deploypath/sitemap.xml" [string map [list %%DATA%% $sitemapurls] [fsread body/sitemap.xml]]
+
+
+
+
+
