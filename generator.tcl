@@ -45,6 +45,7 @@ set mymatrix [list \
 {gpg "GPG"} \
 ]
 set fake [list \
+{index Home} \
 {about About} \
 {gpg "GPG"} \
 ]
@@ -78,7 +79,7 @@ foreach item $copy_files {
 }
 
 #github CNAME file
-#fswrite "$deploypath/CNAME" alberto.dietze.it
+fswrite "$deploypath/CNAME" alberto.dietze.it
 
 foreach index $mymatrix {
 	foreach {fname display} $index {}
