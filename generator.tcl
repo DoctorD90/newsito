@@ -12,12 +12,12 @@ set siteurl alberto.dietze.it
 set mymatrix [list \
 {index Home "1.0"} \
 {about About "0.5"} \
-{gpg "GPG" "0.5"} \
+{gpg GPG "0.5"} \
 ]
 set fake [list \
 {index Home "1.0"} \
 {about About "0.5"} \
-{gpg "GPG" "0.5"} \
+{gpg GPG "0.5"} \
 ]
 
 #file read
@@ -43,7 +43,7 @@ proc navbarelement {mymatrix item} {
 	set navbar_other "<li><a href=\"%%link%%.html\">%%display%%</a></li>"
 	set string ""
 	foreach index $mymatrix {
-		foreach {fname display} $index {}
+		foreach {fname display valprio} $index {}
 		if {$item == $fname} {set nav $navbar_active} {set nav $navbar_other}
 		lappend string [string map [list %%link%% $fname %%display%% $display] $nav]
 	}
